@@ -18,21 +18,22 @@ ORIGIN="http://localhost:5173"
 ```
 
 2. Install dependencies and run:
+
    Open Terminal
 
-```
-cd airbnb-client
-npm install
-npm run dev
-```
+   ```
+   cd airbnb-client
+   npm install
+   npm run dev
+   ```
 
-Open new Terminal
+   Open new Terminal
 
-```
-cd airbnb-server
-npm install
-npm run dev
-```
+   ```
+   cd airbnb-server
+   npm install
+   npm run dev
+   ```
 
 ---
 
