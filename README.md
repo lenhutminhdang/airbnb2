@@ -10,12 +10,12 @@ MERN stack app
 
 1. Create airbnb-server/.env file with following content:
 
-```
-MONGO_URL=<Your_MongoDB_URL>
-PORT=8080
-JWT=<Your_Secret_Key>
-ORIGIN="http://localhost:5173"
-```
+   ```
+   MONGO_URL=<Your_MongoDB_URL>
+   PORT=8080
+   JWT=<Your_Secret_Key>
+   ORIGIN="http://localhost:5173"
+   ```
 
 2. Install dependencies and run:
 
