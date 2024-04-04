@@ -9,33 +9,22 @@ require("dotenv").config();
 const User = require("./models/User");
 const Place = require("./models/Place");
 const Booking = require("./models/Booking");
+
 const cookieParser = require("cookie-parser");
 
+const app = express();
 const port = process.env.PORT || 3000;
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = process.env.JWT;
 
-const app = express();
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(
   cors({
-    // origin: process.env.ORIGIN,
+    credentials: true,
     origin: "http://localhost:5173",
-    // credentials: true,
   })
 );
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:5173"); // https://airbnb-client-7kp4.onrender.com
-//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
-//   );
-//   next();
-// });
 
 mongoose.connect(process.env.MONGO_URL);
 
@@ -44,15 +33,13 @@ function getUserDataFromReq(req) {
     jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
 
-      console.log(userData);
-
       resolve(userData);
     });
   });
 }
 
 app.get("/", (req, res) => {
-  res.json("ok");
+  res.json("get /");
 });
 
 app.post("/signup", async (req, res) => {
@@ -91,23 +78,32 @@ app.post("/login", async (req, res) => {
       res.status(422).json("password not ok");
     }
   } else {
-    res.status(422).json("not found user");
+    res.json("not found user");
   }
 });
 
-app.get("/profile", async (req, res) => {
-  const userData = await getUserDataFromReq(req);
+app.get("/profile", (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
 
-  const { name, email, _id } = await User.findById(userData.id);
+      const { name, email, _id } = await User.findById(userData.id);
 
-  res.json({ name, email, _id });
+      res.json({ name, email, _id });
+    });
+  } else {
+    res.json(null);
+  }
 });
 
 app.get("/logout", (req, res) => {
   res.cookie("token", "").json(true);
 });
 
-app.post("/places", async (req, res) => {
+app.post("/places", (req, res) => {
+  const { token } = req.cookies;
+
   const {
     title,
     address,
@@ -121,31 +117,39 @@ app.post("/places", async (req, res) => {
     price,
   } = req.body;
 
-  const userData = await getUserDataFromReq(req);
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
 
-  const placeDoc = await Place.create({
-    owner: userData.id,
-    title,
-    address,
-    photos,
-    description,
-    perks,
-    extraInfo,
-    checkIn,
-    checkOut,
-    maxGuests,
-    price,
+    const placeDoc = await Place.create({
+      owner: userData.id,
+      title,
+      address,
+      photos,
+      description,
+      perks,
+      extraInfo,
+      checkIn,
+      checkOut,
+      maxGuests,
+      price,
+    });
+
+    res.json(placeDoc);
   });
-
-  res.json(placeDoc);
 });
 
-app.get("/user-places", async (req, res) => {
-  const userData = await getUserDataFromReq(req);
-  const placesDoc = await Place.find({
-    owner: userData.id,
+app.get("/user-places", (req, res) => {
+  const { token } = req.cookies;
+
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+
+    const placesDoc = await Place.find({
+      owner: userData.id,
+    });
+
+    res.json(placesDoc);
   });
-  res.json(placesDoc);
 });
 
 app.get("/places/:placeId", async (req, res) => {
@@ -154,6 +158,7 @@ app.get("/places/:placeId", async (req, res) => {
 });
 
 app.put("/places", async (req, res) => {
+  const { token } = req.cookies;
   const {
     placeId,
     title,
@@ -168,25 +173,27 @@ app.put("/places", async (req, res) => {
     price,
   } = req.body;
 
-  const userData = await getUserDataFromReq(req);
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
 
-  const placeDoc = await Place.findById(placeId);
-  if (userData.id === placeDoc.owner.toString()) {
-    placeDoc.set({
-      title,
-      address,
-      photos,
-      description,
-      perks,
-      extraInfo,
-      checkIn,
-      checkOut,
-      maxGuests,
-      price,
-    });
-    placeDoc.save();
-    res.json("ok");
-  }
+    const placeDoc = await Place.findById(placeId);
+    if (userData.id === placeDoc.owner.toString()) {
+      placeDoc.set({
+        title,
+        address,
+        photos,
+        description,
+        perks,
+        extraInfo,
+        checkIn,
+        checkOut,
+        maxGuests,
+        price,
+      });
+      placeDoc.save();
+      res.json("ok");
+    }
+  });
 });
 
 app.get("/places", async (req, res) => {

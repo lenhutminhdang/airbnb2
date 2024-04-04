@@ -17,9 +17,9 @@ import PlaceDetails from "./pages/PlaceDetails";
 import Booking from "./pages/account/Booking";
 import Error from "./pages/Error";
 
-axios.defaults.baseURL = "http://localhost:10000";
+axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
-axios.defaults.timeout = 5000;
+// axios.defaults.timeout = 5000;
 
 const router = createBrowserRouter([
   {
