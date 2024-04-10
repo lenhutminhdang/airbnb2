@@ -8,7 +8,7 @@ MERN stack app
 
 ## Guide
 
-1. Create airbnb-server/.env file with following content:
+1. Create _airbnb-server/.env_ file with following content:
 
    ```
    MONGO_URL=<Your_MongoDB_URL>
@@ -17,7 +17,9 @@ MERN stack app
    ORIGIN="http://localhost:5173"
    ```
 
-2. Install dependencies and run:
+2. Add your firebase config in _airbnb-client/src/firebase/firebase.jsx_
+
+3. Install dependencies and run:
 
    Open Terminal
 
