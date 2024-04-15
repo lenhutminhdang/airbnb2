@@ -4,7 +4,7 @@
 
 ![airbnb clone](airbnb-client/public/desc.png)
 
-MERN stack app
+**Demo Video:** [youtube.com](https://youtu.be/vzwhi890_mQ)
 
 ## Guide
 
@@ -37,6 +37,8 @@ MERN stack app
    npm run dev
    ```
 
----
+4. Import fake data to your MongoDB Compass if needed
 
-Owned by: [Minh Dang](https://github.com/lenhutminhdang) (Github)
+   _test.bookings.json_
+   _test.places.json_
+   _test.users.json_
