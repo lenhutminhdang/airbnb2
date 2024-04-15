@@ -40,5 +40,7 @@
 4. Import fake data to your MongoDB Compass if needed
 
    _test.bookings.json_
+
    _test.places.json_
+
    _test.users.json_
