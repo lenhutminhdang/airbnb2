@@ -1,0 +1,105 @@
+[{
+  "_id": {
+    "$oid": "65faaa493ebd5c05f67689a6"
+  },
+  "owner": {
+    "$oid": "65f556b826fc943ff0b71e5a"
+  },
+  "place": {
+    "$oid": "65faa8af3ebd5c05f676894e"
+  },
+  "name": "Minh Dang",
+  "phone": "0123456789",
+  "checkIn": {
+    "$date": "2024-03-21T00:00:00.000Z"
+  },
+  "checkOut": {
+    "$date": "2024-03-22T00:00:00.000Z"
+  },
+  "price": 120,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65faecaaf17f4a8389fb1305"
+  },
+  "owner": {
+    "$oid": "65faec2df17f4a8389fb12fd"
+  },
+  "place": {
+    "$oid": "65fad4fb5e34f49ad3685130"
+  },
+  "name": "John Doe",
+  "phone": "0326900123",
+  "checkIn": {
+    "$date": "2024-04-01T00:00:00.000Z"
+  },
+  "checkOut": {
+    "$date": "2024-04-02T00:00:00.000Z"
+  },
+  "price": 320,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fd7147015ef92dbaf41686"
+  },
+  "owner": {
+    "$oid": "65fbdcbac6449e9ba27868cf"
+  },
+  "place": {
+    "$oid": "65fd05eed94f3be82c7326cc"
+  },
+  "name": "John",
+  "phone": "0123456789",
+  "checkIn": {
+    "$date": "2024-03-21T00:00:00.000Z"
+  },
+  "checkOut": {
+    "$date": "2024-03-06T00:00:00.000Z"
+  },
+  "price": 1800,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fe52c9cbfed853dc9446de"
+  },
+  "owner": {
+    "$oid": "65fbdcbac6449e9ba27868cf"
+  },
+  "place": {
+    "$oid": "65fd05eed94f3be82c7326cc"
+  },
+  "name": "John",
+  "phone": "0123456789",
+  "checkIn": {
+    "$date": "2024-03-24T00:00:00.000Z"
+  },
+  "checkOut": {
+    "$date": "2024-03-26T00:00:00.000Z"
+  },
+  "price": 240,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660e080df4542b5d3c94964d"
+  },
+  "owner": {
+    "$oid": "65fbdcbac6449e9ba27868cf"
+  },
+  "place": {
+    "$oid": "65fd05eed94f3be82c7326cc"
+  },
+  "name": "John",
+  "phone": "1234567890",
+  "checkIn": {
+    "$date": "2024-04-04T00:00:00.000Z"
+  },
+  "checkOut": {
+    "$date": "2024-04-06T00:00:00.000Z"
+  },
+  "price": 240,
+  "__v": 0
+}]
